@@ -1,10 +1,14 @@
 <template>
-  <div>
-    <h1>Home</h1>
-    <button class="btn btn-primary">Primary</button>
-    <button class="btn btn-error">Erro</button>
+  <div class="p-4">
+    Home
   </div>
+
+  <input v-model="text" type="text" placeholder="Type here" class="input" />
+  {{ text }}
 </template>
 
 <script setup>
+const text = ref('')
+
+const textWithComputed = computed(() => text.value)
 </script>
