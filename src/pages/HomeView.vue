@@ -2,13 +2,26 @@
   <div class="p-4">
     Home
   </div>
-
-  <input v-model="text" type="text" placeholder="Type here" class="input" />
-  {{ text }}
+  <pre>
+    {{ episodes }}
+  </pre>
 </template>
 
 <script setup>
-const text = ref('')
+import axios from 'axios';
 
-const textWithComputed = computed(() => text.value)
+const episodes = ref([])
+
+async function handleGetEpsodes(){
+  try {
+    const response = await axios.get('https://rickandmortyapi.com/api/episode')
+    episodes.value = response.data.results
+  } catch (error) {
+    console.error( error)
+  }
+}
+
+onMounted(() => {
+  handleGetEpsodes()
+})
 </script>
