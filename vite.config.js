@@ -4,6 +4,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import tailwindcss from '@tailwindcss/vite'
+import Components from 'unplugin-vue-components/vite'
 
 import AutoImport from 'unplugin-auto-import/vite'
 
@@ -23,6 +24,15 @@ export default defineConfig({
       imports: [
         'vue'
       ]
+    }),
+    Components({
+      dirs: ['src/components'],
+      extensions: ['vue'],
+      deep: true,
+      dts: false,
+      include: [/\.vue$/, /\.vue\?vue/, /\.vue\.[tj]sx?\?vue/],
+      exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
+      excludeNames: [/^Async.+/],
     }),
 
   ],
