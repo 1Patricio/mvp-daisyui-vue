@@ -2,7 +2,7 @@
   <div class="card bg-base-100 shadow-sm hover:bg-neutral-content hover:shadow-md cursor-pointer "
     @click="emit('clickEpisode')"
   >
-    <div class="avatar-group -space-x-6">
+    <div class="avatar-group -space-x-6 p-4">
 
       <div class="avatar" v-for="character in charactersFilter" :key="character">
         <div class="w-12">
