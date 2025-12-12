@@ -9,6 +9,7 @@
         :episode="episode.episode"
         :air-date="episode.air_date"
         :characters="episode.characters"
+        @clickEpisode="openModal(episode.id)"
       />
     </div>
 
@@ -26,6 +27,11 @@
       </div>
     </div>
 
+    <ModalEpisode
+      v-model="modal"
+      :id="episodeSelected"
+    />
+
   </div>
 </template>
 
@@ -35,8 +41,10 @@ import axios from 'axios';
 const episodes = ref([])
 const page = ref(1)
 const totalPages = ref(0)
+const episodeSelected = ref('')
+const modal = ref(false)
 
-async function handleGetEpsodes() {
+async function handleGetEpisodes() {
   try {
     const response = await axios.get('https://rickandmortyapi.com/api/episode', {
       params: {
@@ -52,10 +60,15 @@ async function handleGetEpsodes() {
 
 function setPagionation(newPage){
   page.value = newPage
-  handleGetEpsodes()
+  handleGetEpisodes()
+}
+
+function openModal(episodeId){
+  episodeSelected.value = episodeId.toString()
+  modal.value = true
 }
 
 onMounted(() => {
-  handleGetEpsodes()
+  handleGetEpisodes()
 })
 </script>
